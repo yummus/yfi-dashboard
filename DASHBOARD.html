@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YFI Command Center — Nina Dashboard</title>
+<style>
+:root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;--accent:#6366f1;--green:#22c55e;--red:#ef4444;--yellow:#eab308;--blue:#3b82f6;--purple:#a855f7;--text:#e2e8f0;--muted:#94a3b8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:24px 32px;border-bottom:1px solid var(--border)}
+.header h1{font-size:24px;font-weight:700;display:flex;align-items:center;gap:12px}
+.header h1 span{font-size:28px}
+.header .subtitle{color:var(--muted);margin-top:4px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;padding:24px 32px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card h2{font-size:16px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2 .icon{font-size:20px}
+.stat-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.stat-row:last-child{border:none}
+.stat-label{color:var(--muted);font-size:13px}
+.stat-value{font-weight:600;font-size:14px}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.badge-green{background:#166534;color:#22c55e}
+.badge-red{background:#7f1d1d;color:#ef4444}
+.badge-yellow{background:#713f12;color:#eab308}
+.badge-blue{background:#1e3a5f;color:#3b82f6}
+.badge-purple{background:#3b0764;color:#a855f7}
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;border-radius:3px;transition:width .3s}
+.section-title{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:24px 32px 8px;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase}
+td{padding:8px 12px;border-bottom:1px solid var(--border)}
+tr:hover{background:rgba(99,102,241,.05)}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot-green{background:var(--green)}
+.dot-red{background:var(--red)}
+.dot-yellow{background:var(--yellow)}
+.dot-blue{background:var(--blue)}
+.link{color:var(--accent);text-decoration:none;font-size:13px}
+.link:hover{text-decoration:underline}
+.timeline{position:relative;padding-left:20px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--border)}
+.timeline-item{position:relative;padding:8px 0 8px 16px;font-size:13px}
+.timeline-item::before{content:'';position:absolute;left:-17px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.timeline-item .time{color:var(--muted);font-size:11px}
+.full-width{grid-column:1/-1}
+</style>
+</head>
+<body>
+<div class="header">
+<h1><span>🎛️</span> YFI Command Center <span style="font-size:14px;color:var(--muted);font-weight:400">by Nina</span></h1>
+<div class="subtitle">Dashboard unificador de automatizaciones, pipeline, finanzas y operaciones — Actualizado: 11-Sep-2026 16:00 CDT</div>
+</div>
+
+<!-- KPIs -->
+<div class="grid">
+<div class="card">
+<h2><span class="icon">🤖</span> Automatizaciones</h2>
+<div class="stat-row"><span class="stat-label">Cron Jobs activos</span><span class="stat-value">153 <span class="badge badge-green">97% OK</span></span></div>
+<div class="stat-row"><span class="stat-label">Skills cargados</span><span class="stat-value">21</span></div>
+<div class="stat-row"><span class="stat-label">Deploy status</span><span class="stat-value"><span class="badge badge-green">🟢 VERDE</span></span></div>
+<div class="stat-row"><span class="stat-label">Modelo principal</span><span class="stat-value">gpt-6-astra</span></div>
+<div class="stat-row"><span class="stat-label">Vision</span><span class="stat-value">gemini-3.8-flash</span></div>
+<div class="stat-row"><span class="stat-label">Fallback</span><span class="stat-value">mimo-v2.5 → deepseek</span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">💰</span> Finanzas Consolidadas (USD)</h2>
+<div class="stat-row"><span class="stat-label">Activos totales</span><span class="stat-value">$196,049</span></div>
+<div class="stat-row"><span class="stat-label">Pasivos totales</span><span class="stat-value">$183,434</span></div>
+<div class="stat-row"><span class="stat-label">Capital contable</span><span class="stat-value">$4,024</span></div>
+<div class="stat-row"><span class="stat-label">Ventas netas (Jun-Ago)</span><span class="stat-value">$84,025</span></div>
+<div class="stat-row"><span class="stat-label">Utilidad neta</span><span class="stat-value"><span class="badge badge-green">$8,590 (8.1%)</span></span></div>
+<div class="stat-row"><span class="stat-label">CxC vencida</span><span class="stat-value"><span class="badge badge-red">$101,003</span></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">📦</span> Pipeline Ventas</h2>
+<div class="stat-row"><span class="stat-label">SOs draft activas</span><span class="stat-value">4</span></div>
+<div class="stat-row"><span class="stat-label">Propuestas enviadas hoy</span><span class="stat-value">4 <span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">Clientes autoreply</span><span class="stat-value">7</span></div>
+<div class="stat-row"><span class="stat-label">Follow-ups pendientes</span><span class="stat-value"><span class="badge badge-yellow">3</span></span></div>
+<div class="stat-row"><span class="stat-label">Hospitales ABC</span><span class="stat-value"><span class="badge badge-yellow">Esperando pricing</span></span></div>
+<div class="stat-row"><span class="stat-label">3B (OC 17485)</span><span class="stat-value"><span class="badge badge-green">Facturado $57K</span></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">🏭</span> Producción / Inventario</h2>
+<div class="stat-row"><span class="stat-label">MOs draft creadas</span><span class="stat-value">5</span></div>
+<div class="stat-row"><span class="stat-label">Puffs → Soskende</span><span class="stat-value"><span class="badge badge-blue">SOS/MO/00077</span></span></div>
+<div class="stat-row"><span class="stat-label">Crujientes → Galdisa</span><span class="stat-value"><span class="badge badge-blue">GALD/MO/00038-40</span></span></div>
+<div class="stat-row"><span class="stat-label">Tahini → Proseresa</span><span class="stat-value"><span class="badge badge-blue">PROS/MO/00047</span></span></div>
+<div class="stat-row"><span class="stat-label">OCs pendientes VoBo</span><span class="stat-value">3 (P00203-205)</span></div>
+<div class="stat-row"><span class="stat-label">Stock Puffs 35g</span><span class="stat-value">41,814 u ✅</span></div>
+</div>
+</div>
+
+<!-- Pipeline Table -->
+<div class="section-title">📊 Pipeline de Ventas — Clientes</div>
+<div class="grid">
+<div class="card full-width">
+<table>
+<tr><th>Cliente</th><th>SO</th><th>Total</th><th>Company</th><th>Email</th><th>Estado</th><th>Follow-up</th></tr>
+<tr><td>Zitrone</td><td>S02978</td><td>$1,976 MXN</td><td>MX</td><td>tesoreria@</td><td><span class="badge badge-blue">Email enviado</span></td><td>11-sep</td></tr>
+<tr><td>Colectivo Saludable</td><td>S02979</td><td>$1,976 MXN</td><td>MX</td><td>mawiparaelbuenvivir@</td><td><span class="badge badge-blue">Email enviado</span></td><td>11-sep</td></tr>
+<tr><td>El Emigrante</td><td>S02980</td><td>$1,976 MXN</td><td>MX</td><td>erick@almouhajer.com</td><td><span class="badge badge-blue">Email enviado</span></td><td>11-sep</td></tr>
+<tr><td>Buen Rollo</td><td>S02981</td><td>Q1,740 GTQ</td><td>GT</td><td>N/A</td><td><span class="badge badge-yellow">Sin email GT</span></td><td>Pendiente</td></tr>
+<tr><td>Hospitales ABC</td><td>—</td><td>Pricing tuyo</td><td>MX</td><td>angeles.enciso6@</td><td><span class="badge badge-yellow">Esperando pricing</span></td><td>5:30 PM</td></tr>
+<tr><td>La Europea Campa</td><td>—</td><td>—</td><td>MX</td><td>campa@laeuropea.com.mx</td><td><span class="badge badge-yellow">Factura pendiente</span></td><td>10-sep</td></tr>
+<tr><td>Zoco Fresh</td><td>—</td><td>$5,095</td><td>MX</td><td>compras@zocofresh.com</td><td><span class="badge badge-yellow">Cancelación INV</span></td><td>9-sep</td></tr>
+<tr><td>3B (Tres B)</td><td>S02884</td><td>$57,141</td><td>MX</td><td>—</td><td><span class="badge badge-green">Facturado ✓</span></td><td>Completado</td></tr>
+</table>
+</div>
+</div>
+
+<!-- Autoreply & Clients -->
+<div class="section-title">🔐 Clientes — Autoreply Autorizado</div>
+<div class="grid">
+<div class="card">
+<h2><span class="icon">✅</span> Autoreply Directo</h2>
+<div class="stat-row"><span class="stat-label">La Europea (todas sucursales)</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">Zoco Fresh</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">Ingredienta</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">Yaaxtal</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">Zitrone</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">Colectivo Saludable</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+<div class="stat-row"><span class="stat-label">El Emigrante</span><span class="stat-value"><span class="badge badge-green">✓</span></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">🔒</span> Requieren VoBo</h2>
+<div class="stat-row"><span class="stat-label">LATAM Food Broker</span><span class="stat-value"><span class="badge badge-yellow">Borrador</span></span></div>
+<div class="stat-row"><span class="stat-label">Operadora Futurama</span><span class="stat-value"><span class="badge badge-yellow">Borrador</span></span></div>
+<div class="stat-row"><span class="stat-label">Sabia Distribuidora</span><span class="stat-value"><span class="badge badge-yellow">Borrador</span></span></div>
+<div class="stat-row"><span class="stat-label">Unisuper</span><span class="stat-value"><span class="badge badge-yellow">Borrador</span></span></div>
+<div class="stat-row"><span class="stat-label">La Panoteca</span><span class="stat-value"><span class="badge badge-yellow">Borrador</span></span></div>
+<div class="stat-row"><span class="stat-label">Hospitales ABC</span><span class="stat-value"><span class="badge badge-yellow">Pricing</span></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">🏢</span> Multiempresa Odoo</h2>
+<div class="stat-row"><span class="stat-label">Yummus Foods Mexico</span><span class="stat-value">MXN</span></div>
+<div class="stat-row"><span class="stat-label">Yumus S.A. Guatemala</span><span class="stat-value">GTQ</span></div>
+<div class="stat-row"><span class="stat-label">YFI International</span><span class="stat-value">Sin movimiento</span></div>
+<div class="stat-row"><span class="stat-label">Rate USD/MXN</span><span class="stat-value">16.92</span></div>
+<div class="stat-row"><span class="stat-label">Balance consolidado</span><span class="stat-value"><a class="link" href="#balance">Ver abajo</a></span></div>
+</div>
+</div>
+
+<!-- Quick Access Links -->
+<div class="section-title">🔗 Accesos Rápidos — Monday.com</div>
+<div class="grid">
+<div class="card">
+<h2><span class="icon">📋</span> Monday.com</h2>
+<div class="stat-row"><span class="stat-label">Board Seguimiento Siman</span><span class="stat-value"><a class="link" href="https://monday.com">20 items ✓</a></span></div>
+<div class="stat-row"><span class="stat-label">CxC Vencida</span><span class="stat-value"><a class="link" href="https://monday.com">$101K pendiente</a></span></div>
+<div class="stat-row"><span class="stat-label">Forecast MOs</span><span class="stat-value"><a class="link" href="https://monday.com">5 MOs draft</a></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">📊</span> Odoo</h2>
+<div class="stat-row"><span class="stat-label">Balance General</span><span class="stat-value"><a class="link" href="#">Contabilidad > Reportes</a></span></div>
+<div class="stat-row"><span class="stat-label">Ventas</span><span class="stat-value"><a class="link" href="#">Ventas > Pedidos</a></span></div>
+<div class="stat-row"><span class="stat-label">Producción</span><span class="stat-value"><a class="link" href="#">Manufactura > Órdenes</a></span></div>
+<div class="stat-row"><span class="stat-label">Inventario</span><span class="stat-value"><a class="link" href="#">Inventario > Operaciones</a></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">📧</span> Gmail</h2>
+<div class="stat-row"><span class="stat-label">Borradores pendientes</span><span class="stat-value"><a class="link" href="#">3 drafts</a></span></div>
+<div class="stat-row"><span class="stat-label">Seguimiento clientes</span><span class="stat-value"><a class="link" href="#">3x/día 9am/1pm/5pm</a></span></div>
+<div class="stat-row"><span class="stat-label">Autoreply</span><span class="stat-value"><span class="badge badge-green">7 clientes</span></span></div>
+</div>
+
+<div class="card">
+<h2><span class="icon">⚙️</span> Infraestructura</h2>
+<div class="stat-row"><span class="stat-label">VM</span><span class="stat-value">nina-gateway</span></div>
+<div class="stat-row"><span class="stat-label">Proyecto GCP</span><span class="stat-value">perplexityconnector-493000</span></div>
+<div class="stat-row"><span class="stat-label">GitHub</span><span class="stat-value"><a class="link" href="#">yummus/yfi-agents</a></span></div>
+<div class="stat-row"><span class="stat-label">Deploy</span><span class="stat-value"><span class="badge badge-green">VERDE</span></span></div>
+</div>
+</div>
+
+<!-- Balance -->
+<div class="section-title">📈 Balance General Consolidado YFI — USD</div>
+<div class="grid">
+<div class="card full-width">
+<table>
+<tr><th>Concepto</th><th style="text-align:right">MXN</th><th style="text-align:right">USD</th></tr>
+<tr><td><strong>ACTIVOS</strong></td><td style="text-align:right">$3,317,182</td><td style="text-align:right">$196,049</td></tr>
+<tr><td><strong>PASIVOS</strong></td><td style="text-align:right">$3,103,742</td><td style="text-align:right">$183,434</td></tr>
+<tr><td><strong>CAPITAL CONTABLE</strong></td><td style="text-align:right">$68,089</td><td style="text-align:right">$4,024</td></tr>
+<tr style="background:rgba(99,102,241,.1)"><td><strong>INGRESOS</strong></td><td style="text-align:right">$1,804,182</td><td style="text-align:right">$106,629</td></tr>
+<tr><td><strong>COSTOS Y GASTOS</strong></td><td style="text-align:right">$1,658,830</td><td style="text-align:right">$98,038</td></tr>
+<tr style="background:rgba(34,197,94,.1)"><td><strong>UTILIDAD NETA</strong></td><td style="text-align:right"><strong>$145,352</strong></td><td style="text-align:right"><strong>$8,590</strong></td></tr>
+<tr><td colspan="3" style="color:var(--muted);font-size:12px">Rate: 1 USD = 16.92 MXN | Acumulado histórico | MX + GT consolidado</td></tr>
+</table>
+</div>
+</div>
+
+<!-- Recent Activity -->
+<div class="section-title">🕐 Actividad Reciente — 11-Sep-2026</div>
+<div class="grid">
+<div class="card full-width">
+<div class="timeline">
+<div class="timeline-item"><div class="time">16:00</div>📧 4 emails enviados (Zitrone, Colectivo, Emigrante, Hospitales ABC)</div>
+<div class="timeline-item"><div class="time">15:30</div>📝 SOs creadas y corregidas: S02978-2081 (4 clientes)</div>
+<div class="timeline-item"><div class="time">15:00</div>🔍 Auditoría SOs: pricelist, company, IVA, duplicates — todo OK</div>
+<div class="timeline-item"><div class="time">14:30</div>🏭 5 MOs creadas: Crujientes→Galdisa, Puffs→Soskende, Tahini→Proseresa</div>
+<div class="timeline-item"><div class="time">14:00</div>📊 Balance consolidado YFI en USD calculado</div>
+<div class="timeline-item"><div class="time">13:30</div>🤖 Cronjob vigilancia clientes 3x/día configurado</div>
+<div class="timeline-item"><div class="time">13:00</div>📋 Skill yfi-ventas-followup creado con reglas autoreply</div>
+<div class="timeline-item"><div class="time">12:30</div>🔧 Fix gmail_send_sa.py (SA key fallback)</div>
+<div class="timeline-item"><div class="time">12:00</div>📊 Forecast MOs interno: 3,196 u MX + 210 u GT</div>
+<div class="timeline-item"><div class="time">11:00</div>🔍 Auditoría BOMs y plantas de manufactura</div>
+<div class="timeline-item"><div class="time">10:00</div>📝 Regla R-SUP-04 (planta por producto) guardada</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
